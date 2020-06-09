@@ -26,3 +26,10 @@ end
          expect(headline).to eql('Entertainers')
     end
 end
+
+    describe persons  do 
+    it "Test 4: Search for a group" do
+         groupname = persons.searchGroup
+         expect(groupname).to eql('NCT Musicians')
+    end
+end
