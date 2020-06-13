@@ -2,9 +2,11 @@ require 'selenium-webdriver'
 require 'webdrivers'
 require 'rspec'
 require_relative 'SearchSections'
+require_relative 'UITestSections'
 require 'capybara/rspec'
 driver = Selenium::WebDriver.for :chrome
 persons = SearchSections.new(driver)
+ui = UITestSections.new(driver)
 
 
 describe persons do 
@@ -43,9 +45,22 @@ end
 end
 
 describe persons do 
-    it 'Test 6:  Music video selected should load' do
+    it 'Test 6:  Music video loads' do
         playvideo = persons.loadMusicVideo
         expect(playvideo).to eql (true)
     end
 end
 
+describe ui do
+    it 'Test 7: Scroll through page 2 news' do
+        scroll = ui.scrollThroughNewsOnce
+        expect(scroll). to eql ('2')
+    end
+end
+
+describe ui do
+    it 'Test 8: Scroll through page 3 news' do
+        scroll = ui.scrollThroughNewsTwice
+        expect(scroll). to eql ('3')
+    end
+end
