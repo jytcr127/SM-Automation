@@ -64,3 +64,13 @@ describe ui do
         expect(scroll). to eql ('3')
     end
 end
+
+describe ui do
+    it 'Test 9: Close Video' do
+        closeVideo = ui.closeVideo
+        expect(closeVideo).to eql (false)
+    end
+end
+
+
+
