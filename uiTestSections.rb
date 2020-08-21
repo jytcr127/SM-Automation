@@ -1,5 +1,6 @@
 require 'page-object'
 
+$closeButton = 'btn_close'
 $page1 = '/html/body/div[2]/div[2]/div[1]/div[4]/div/div/ul/li[1]/div/a[2]/b'
 $page2 ='/html/body/div[2]/div[2]/div[1]/div[4]/div/div/ul/li[2]/div/a[2]/b'
 $page3 = '/html/body/div[2]/div[2]/div[1]/div[4]/div/div/ul/li[3]/div/a[2]/b'
@@ -20,7 +21,10 @@ class UITestSections
     def scrollThroughNewsOnce
     driver = Selenium::WebDriver.for :chrome
     driver.navigate.to 'https://www.smtown.com/'
+    driver.find_element(xpath: '/html/body/div[2]/a').click
     driver.find_element(class: $clickButton).click
+    wait = Selenium::WebDriver::Wait.new(timeout: 50) # seconds
+    wait.until { driver.find_element(xpath: $page2).displayed?}
     pageNumber = driver.find_element(xpath: $page2).text
     return pageNumber
 end
@@ -28,6 +32,7 @@ end
     def scrollThroughNewsTwice
     driver = Selenium::WebDriver.for :chrome
     driver.navigate.to 'https://www.smtown.com/'
+    driver.find_element(xpath: '/html/body/div[2]/a').click
     driver.find_element(class: $clickButton).click
     wait = Selenium::WebDriver::Wait.new(timeout: 50) # seconds
     wait.until { driver.find_element(xpath: $clickTwiceButton).displayed?}
